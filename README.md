@@ -1,129 +1,101 @@
-AS3 SVG — ActionScript 3 SVG Rendering Library
+# AS3 SVG — ActionScript 3 SVG Rendering Library
 
-AS3 SVG is a pure ActionScript 3 library for parsing and rendering SVG files in Adobe AIR and Flash Player applications. It is built on top of the native Flash Display List and provides asynchronous rendering for smooth performance, even with large SVG documents.
+AS3 SVG is a pure ActionScript 3 library for parsing and rendering SVG files in Adobe AIR and Flash Player applications.  
+It is built on top of the native Flash Display List and provides asynchronous rendering for smooth performance, even with large SVG documents.
 
 It supports a wide subset of SVG 1.1 along with several SVG 2.0 features.
 
 ---
 
-✨ Key Features
+# ✨ Key Features
 
-Load SVG from:
+## 📥 SVG Loading
+- Load SVG from:
+  - URL or local file path
+  - Raw SVG string
+  - XML object
 
-URL or local file path
+## ⚡ Performance
+- Asynchronous parsing (non-blocking rendering)
+- Full Display List-based rendering (no rasterization required)
 
-Raw SVG string
+## 🎨 SVG Support
+- Core elements:
+  - `path`, `rect`, `circle`, `ellipse`, `line`, `polygon`, `polyline`
+  - `text`, `tspan`, `image`
+  - `g`, `defs`, `use`, `symbol`, `switch`, `a`
 
-XML object
+## 🌈 Gradients
+- Linear gradients
+- Radial gradients
+- Supports `spreadMethod` and `gradientTransform`
 
+## 🎭 Filters (limited support)
+- `feGaussianBlur`
+- `feColorMatrix`
 
-Asynchronous parsing (non-blocking rendering)
+## 🔄 Transform Support
+- `translate`, `scale`, `rotate`, `skewX`, `skewY`, `matrix`
 
-Full Display List-based rendering (no rasterization required)
+## 📐 Layout Features
+- `viewBox`
+- `preserveAspectRatio`
 
-Supports major SVG elements:
+## 🎨 Styling Support
+- CSS class selectors
+- Inline styles
 
-path, rect, circle, ellipse, line, polygon, polyline
+## 📏 Unit Support
+- `px`, `pt`, `pc`, `mm`, `cm`, `in`
+- `em`, `rem`
+- `vw`, `vh`, `%`
 
-text, tspan, image
-
-g, defs, use, symbol, switch, a
-
-
-Gradients:
-
-Linear gradients
-
-Radial gradients
-
-Supports spreadMethod and gradientTransform
-
-
-Filters (limited support):
-
-feGaussianBlur
-
-feColorMatrix
-
-
-Full transform support:
-
-translate, scale, rotate, skewX, skewY, matrix
-
-
-viewBox and preserveAspectRatio
-
-CSS support:
-
-Class selectors
-
-Inline styles
-
-
-Unit support:
-
-px, pt, pc, mm, cm, in, em, rem, vw, vh, %
-
-
-Runtime style modification
-
-Dynamic element access and manipulation
-
-
+## 🧠 Runtime Features
+- Dynamic style modification
+- Runtime element access and manipulation
 
 ---
 
-📦 Requirements
+# 📦 Requirements
 
-Requirement	Version
-
-Adobe AIR SDK	3.0+ (tested up to 51.x)
-Flash Player	11.0+
-ActionScript	3.0
-
-
+| Requirement        | Version |
+|--------------------|--------|
+| Adobe AIR SDK      | 3.0+ (tested up to 51.x) |
+| Flash Player       | 11.0+ |
+| ActionScript       | 3.0 |
 
 ---
 
-📁 Installation
+# 📁 Installation
 
-1. Copy the com/ folder into your project root:
+## 1. Copy library files
 
+MyProject/ ├── MyProject.fla └── com/ └── lorentz/
 
-
-MyProject/
-├── MyProject.fla
-└── com/
-    └── lorentz/
-
-2. Add the project root to your Classpath:
-
-
+## 2. Add Classpath
 
 .
 
-
 ---
 
-🚀 Quick Start
+# 🚀 Quick Start
 
-> ⚠️ Important: You must initialize ProcessExecutor before using any SVGDocument.
+> ⚠️ Important: Initialize `ProcessExecutor` before using `SVGDocument`.
 
-
-
+```actionscript
 import com.lorentz.SVG.display.SVGDocument;
 import com.lorentz.SVG.events.SVGEvent;
 import com.lorentz.processing.ProcessExecutor;
 import flash.net.URLRequest;
 
-// Initialize async processing engine (once per application)
+// Initialize async engine (once per app)
 ProcessExecutor.instance.initialize(stage);
 
 // Create SVG document
 var svg:SVGDocument = new SVGDocument();
 addChild(svg);
 
-// Listen for events
+// Events
 svg.addEventListener(SVGEvent.PARSE_COMPLETE, onParseComplete);
 svg.addEventListener(SVGEvent.RENDERED, onRendered);
 
@@ -143,12 +115,12 @@ function onRendered(e:SVGEvent):void {
 
 📥 Loading Methods
 
-From URL or file path
+From URL / File Path
 
 svg.load("assets/logo.svg");
 svg.load(new URLRequest("assets/logo.svg"));
 
-From raw SVG string
+From Raw SVG String
 
 var svgString:String =
     '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">' +
@@ -157,7 +129,7 @@ var svgString:String =
 
 svg.parse(svgString);
 
-From XML
+From XML Object
 
 var svgXML:XML =
     <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
@@ -174,7 +146,7 @@ svg.parse(svgXML);
 Event	Description
 
 PARSE_START	Parsing process begins
-PARSE_COMPLETE	SVG tree is fully parsed
+PARSE_COMPLETE	SVG tree fully parsed
 RENDERED	First render completed
 ELEMENT_ADDED	Element added to document
 ELEMENT_REMOVED	Element removed from document
@@ -185,7 +157,7 @@ ELEMENT_REMOVED	Element removed from document
 
 ⚙️ Core Features
 
-Document scaling
+📏 Document Scaling
 
 var scale:Number = Math.min(
     stage.stageWidth / svg.width,
@@ -197,7 +169,7 @@ svg.scaleX = svg.scaleY = scale;
 
 ---
 
-Runtime element access
+🔎 Runtime Element Access
 
 import com.lorentz.SVG.display.base.SVGElement;
 
@@ -206,7 +178,7 @@ var element:SVGElement = svg.getDefinition("myElement");
 
 ---
 
-Modify styles dynamically
+🎨 Modify Styles Dynamically
 
 element.style.setProperty("fill", "#00FF00");
 element.invalidateStyle();
@@ -214,7 +186,7 @@ element.invalidateStyle();
 
 ---
 
-Apply transforms
+🔄 Apply Transforms
 
 element.svgTransform = "translate(50, 20) scale(1.5)";
 
@@ -225,7 +197,7 @@ element.svgTransform = "translate(50, 20) scale(1.5)";
 
 svg.validateWhileParsing = false;
 
-Disables progressive rendering and improves performance for large SVG files.
+Disables progressive rendering for better performance on large SVG files.
 
 
 ---
@@ -241,11 +213,11 @@ svg = null;
 
 🖋️ Text Rendering
 
-Available backends
+Available Backends
 
 Class	Description
 
-FTESVGTextDrawer	High-quality text rendering (default)
+FTESVGTextDrawer	High-quality rendering (default)
 TextFieldSVGTextDrawer	Lightweight alternative
 
 
@@ -254,7 +226,7 @@ svg.textDrawerClass = TextFieldSVGTextDrawer;
 
 ---
 
-Global font override
+Global Font Override
 
 svg.changeTextFormatFunction = function(fmt:SVGTextFormat):void {
     fmt.font = "MyEmbeddedFont";
@@ -312,4 +284,9 @@ Limited filter support
 No <foreignObject> support
 
 No advanced CSS selectors (only class and ID selectors)
+
+
+---
+
+إذا تريد، أقدر أجهز لك نسخة **GitHub احترافية أكثر (مع badges + table of contents + examples repo structure + license section + contribution guide)**.
 
