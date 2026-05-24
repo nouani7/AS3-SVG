@@ -68,7 +68,7 @@ File → Publish Settings → ActionScript Settings → Library Path → Add →
 
 ### 🚀 Quick Start
 
-### ⚠️⚠️⚠️ Important: Initialize `SVGDocument.setup(stage);` before using `SVGDocument`.
+### ⚠️ Important: Initialize `SVGDocument.setup(stage);` before using `SVGDocument`.
 
 ```actionscript
     import com.mx.SVG.display.SVGDocument;
